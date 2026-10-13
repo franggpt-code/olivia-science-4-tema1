@@ -2,36 +2,22 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>Science 4º Primaria · Tema 1: La Salud | Entrenador de Exámenes</title>
   <meta name="description" content="Aplicación interactiva de preparación para el examen de Conocimiento del Medio / Science de 4º de primaria (Tema 1: La Salud). Basada en el proyecto CLAVES Santillana.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
 
-  <!-- Tipografías Google Fonts -->
+  <!-- Tipografías Google Fonts con fallback a fuentes del sistema en iPad -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Nunito', 'sans-serif'],
-            display: ['Outfit', 'sans-serif']
-          }
-        }
-      }
-    }
-  </script>
-
-  <!-- Canvas Confetti CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-
-  <!-- Estilos propios -->
+  <!-- Hojas de estilo locales: Tailwind CSS 100% precompilado + Estilos optimizados para iPad -->
+  <link rel="stylesheet" href="css/tailwind.min.css">
   <link rel="stylesheet" href="css/style.css">
+
+  <!-- Canvas Confetti local compatible con todos los navegadores -->
+  <script src="js/confetti.min.js"></script>
 </head>
 <body class="flex flex-col min-h-screen text-slate-800 antialiased selection:bg-blue-200">
 
@@ -61,7 +47,7 @@
         </div>
       </div>
 
-      <!-- Pestañas centrales de acceso rápido (Desktop) -->
+      <!-- Pestañas centrales de acceso rápido (Desktop / Tablet horizontal) -->
       <nav class="hidden lg:flex items-center gap-1 bg-slate-100/80 p-1 rounded-2xl border border-slate-200/60">
         <button class="nav-tab-btn px-3 py-1.5 rounded-xl text-xs font-black transition" data-target="home">
           🏠 Inicio
@@ -105,7 +91,7 @@
 
     </div>
 
-    <!-- Pestañas móvil (Sub-barra horizontal con scroll) -->
+    <!-- Pestañas táctiles para iPad y móviles (Barra de scroll horizontal fluido) -->
     <div class="lg:hidden flex items-center gap-1 px-4 py-2 border-t border-slate-100 overflow-x-auto no-scrollbar bg-slate-50/70 text-xs font-bold">
       <button class="nav-tab-btn px-3 py-1.5 rounded-xl shrink-0 transition" data-target="home">🏠 Inicio</button>
       <button class="nav-tab-btn px-3 py-1.5 rounded-xl shrink-0 transition" data-target="part1">📝 Parte 1</button>

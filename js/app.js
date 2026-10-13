@@ -2,9 +2,26 @@
 // LÓGICA PRINCIPAL DE LA APLICACIÓN · SCIENCE 4º PRIMARIA · TEMA 1
 // =============================================================================
 
+// Helper seguro para localStorage en iPad / Safari (evita excepciones en modo privado)
+var safeStorage = {
+  get: function(key, fallback) {
+    try {
+      var val = localStorage.getItem(key);
+      return val !== null ? val : fallback;
+    } catch (e) {
+      return fallback;
+    }
+  },
+  set: function(key, val) {
+    try {
+      localStorage.setItem(key, val);
+    } catch (e) {}
+  }
+};
+
 class ScienceApp {
   constructor() {
-    this.studentName = localStorage.getItem("olivia_student_name") || "Olivia";
+    this.studentName = safeStorage.get("olivia_student_name", "Olivia");
     this.currentMode = "home"; // "home" | "exam" | "sorter" | "study" | "results" | "diploma"
     this.currentExamId = null; // "part1" | "part2" | "express"
     this.currentQuestions = [];
@@ -22,8 +39,8 @@ class ScienceApp {
     this.sorterHistory = [];
 
     // Variables de sesión
-    this.stars = parseInt(localStorage.getItem("olivia_stars") || "0", 10);
-    this.examsCompleted = parseInt(localStorage.getItem("olivia_completed") || "0", 10);
+    this.stars = parseInt(safeStorage.get("olivia_stars", "0"), 10);
+    this.examsCompleted = parseInt(safeStorage.get("olivia_completed", "0"), 10);
 
     this.init();
   }
@@ -44,7 +61,7 @@ class ScienceApp {
 
   addStars(count) {
     this.stars += count;
-    localStorage.setItem("olivia_stars", this.stars);
+    safeStorage.set("olivia_stars", this.stars);
     this.renderHeaderStats();
   }
 
@@ -52,7 +69,7 @@ class ScienceApp {
     const trimmed = (newName || "").trim();
     if (trimmed) {
       this.studentName = trimmed;
-      localStorage.setItem("olivia_student_name", this.studentName);
+      safeStorage.set("olivia_student_name", this.studentName);
       this.renderHeaderStats();
     }
   }
@@ -861,7 +878,7 @@ class ScienceApp {
   // ---------------------------------------------------------------------------
   finishExam() {
     this.examsCompleted++;
-    localStorage.setItem("olivia_completed", this.examsCompleted);
+    safeStorage.set("olivia_completed", this.examsCompleted);
 
     const total = this.examResults.length;
     const correctCount = this.examResults.filter(r => r.isCorrect).length;

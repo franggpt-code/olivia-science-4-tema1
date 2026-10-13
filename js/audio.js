@@ -1,6 +1,6 @@
 // =============================================================================
 // GESTOR DE AUDIO Y SÍNTESIS DE VOZ (Web Audio API + SpeechSynthesis)
-// Cero dependencias externas: funciona 100% offline y en cualquier dispositivo
+// Totalmente adaptado para iPad (iOS 12.5.8+), Safari y navegadores modernos
 // =============================================================================
 
 class SoundManager {
@@ -8,20 +8,28 @@ class SoundManager {
     this.soundEnabled = true;
     this.voiceEnabled = false;
     this.audioCtx = null;
-    this.synth = window.speechSynthesis || null;
+    this.synth = ('speechSynthesis' in window) ? window.speechSynthesis : null;
     this.currentUtterance = null;
   }
 
   // Inicializa el AudioContext con la interacción del usuario
   initContext() {
     if (!this.audioCtx) {
-      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      var AudioContextClass = window.AudioContext || window.webkitAudioContext;
       if (AudioContextClass) {
-        this.audioCtx = new AudioContextClass();
+        try {
+          this.audioCtx = new AudioContextClass();
+        } catch (e) {
+          console.warn("AudioContext init error", e);
+        }
       }
     }
     if (this.audioCtx && this.audioCtx.state === "suspended") {
-      this.audioCtx.resume();
+      try {
+        this.audioCtx.resume();
+      } catch (e) {
+        console.warn("AudioContext resume error", e);
+      }
     }
   }
 
@@ -33,21 +41,28 @@ class SoundManager {
   toggleVoice() {
     this.voiceEnabled = !this.voiceEnabled;
     if (!this.voiceEnabled && this.synth) {
-      this.synth.cancel();
+      try {
+        this.synth.cancel();
+      } catch (e) {}
     }
     return this.voiceEnabled;
   }
 
   // Reproduce un tono sintetizado limpio con envolvente ADSR suave
-  playTone(frequency, type = "sine", duration = 0.15, gainValue = 0.15, startTime = 0) {
+  playTone(frequency, type, duration, gainValue, startTime) {
     if (!this.soundEnabled) return;
     this.initContext();
     if (!this.audioCtx) return;
 
+    type = type || "sine";
+    duration = duration || 0.15;
+    gainValue = gainValue || 0.15;
+    startTime = startTime || 0;
+
     try {
-      const t = this.audioCtx.currentTime + startTime;
-      const osc = this.audioCtx.createOscillator();
-      const gain = this.audioCtx.createGain();
+      var t = this.audioCtx.currentTime + startTime;
+      var osc = this.audioCtx.createOscillator();
+      var gain = this.audioCtx.createGain();
 
       osc.type = type;
       osc.frequency.setValueAtTime(frequency, t);
@@ -62,22 +77,23 @@ class SoundManager {
       osc.start(t);
       osc.stop(t + duration);
     } catch (e) {
-      console.warn("Audio play error", e);
+      // Evita interrupciones en navegadores con restricciones de audio
     }
   }
 
   // Sonido de clic suave
   playClick() {
-    this.playTone(600, "triangle", 0.05, 0.08);
+    this.playTone(600, "triangle", 0.05, 0.08, 0);
   }
 
   // Sonido de respuesta correcta (Arpegio Do-Mi-Sol-Do agudo)
   playCorrect() {
     if (!this.soundEnabled) return;
     this.initContext();
-    const notes = [523.25, 659.25, 783.99, 1046.5]; // C5, E5, G5, C6
-    notes.forEach((freq, idx) => {
-      this.playTone(freq, "sine", 0.18, 0.14, idx * 0.07);
+    var self = this;
+    var notes = [523.25, 659.25, 783.99, 1046.5]; // C5, E5, G5, C6
+    notes.forEach(function(freq, idx) {
+      self.playTone(freq, "sine", 0.18, 0.14, idx * 0.07);
     });
   }
 
@@ -93,8 +109,9 @@ class SoundManager {
   playStreak() {
     if (!this.soundEnabled) return;
     this.initContext();
-    [440, 554, 659, 880, 1108].forEach((freq, idx) => {
-      this.playTone(freq, "triangle", 0.15, 0.12, idx * 0.06);
+    var self = this;
+    [440, 554, 659, 880, 1108].forEach(function(freq, idx) {
+      self.playTone(freq, "triangle", 0.15, 0.12, idx * 0.06);
     });
   }
 
@@ -102,7 +119,8 @@ class SoundManager {
   playFanfare() {
     if (!this.soundEnabled) return;
     this.initContext();
-    const melody = [
+    var self = this;
+    var melody = [
       { f: 523.25, d: 0.15, t: 0 },
       { f: 523.25, d: 0.15, t: 0.16 },
       { f: 523.25, d: 0.15, t: 0.32 },
@@ -110,29 +128,30 @@ class SoundManager {
       { f: 783.99, d: 0.2, t: 0.8 },
       { f: 1046.5, d: 0.6, t: 1.05 }
     ];
-    melody.forEach(n => {
-      this.playTone(n.f, "sine", n.d, 0.18, n.t);
+    melody.forEach(function(n) {
+      self.playTone(n.f, "sine", n.d, 0.18, n.t);
     });
   }
 
-  // Lectura en voz alta para Olivia
+  // Lectura en voz alta para Olivia (con soporte seguro en iOS)
   speakText(text) {
-    if (!this.voiceEnabled || !this.synth) return;
+    if (!('speechSynthesis' in window) || !window.speechSynthesis) return;
     try {
-      this.synth.cancel(); // Detiene cualquier locución previa
-      const cleanText = text.replace(/[*_#•]/g, " ").trim();
-      const utterance = new SpeechSynthesisUtterance(cleanText);
+      window.speechSynthesis.cancel();
+      var cleanText = text.replace(/[*_#•]/g, " ").trim();
+      var utterance = new SpeechSynthesisUtterance(cleanText);
       utterance.lang = "es-ES";
-      utterance.rate = 0.95; // Velocidad ligeramente pausada para 4º de primaria
-      utterance.pitch = 1.05; // Tono amable
+      utterance.rate = 0.95;
+      utterance.pitch = 1.05;
 
-      // Busca una voz en español si está disponible
-      const voices = this.synth.getVoices();
-      const esVoice = voices.find(v => v.lang.startsWith("es"));
-      if (esVoice) utterance.voice = esVoice;
+      var voices = window.speechSynthesis.getVoices();
+      if (voices && voices.length > 0) {
+        var esVoice = voices.find(function(v) { return v.lang && v.lang.indexOf("es") === 0; });
+        if (esVoice) utterance.voice = esVoice;
+      }
 
       this.currentUtterance = utterance;
-      this.synth.speak(utterance);
+      window.speechSynthesis.speak(utterance);
     } catch (e) {
       console.warn("SpeechSynthesis error", e);
     }
@@ -140,9 +159,18 @@ class SoundManager {
 
   stopVoice() {
     if (this.synth) {
-      this.synth.cancel();
+      try {
+        this.synth.cancel();
+      } catch (e) {}
     }
   }
 }
 
-const sound = new SoundManager();
+var sound = new SoundManager();
+
+// Desbloqueo anticipado de AudioContext en iOS Safari con el primer toque en pantalla
+['touchstart', 'touchend', 'click'].forEach(function(evt) {
+  document.addEventListener(evt, function() {
+    if (sound) sound.initContext();
+  }, { passive: true, once: true });
+});
