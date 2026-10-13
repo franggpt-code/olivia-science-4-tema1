@@ -11,7 +11,7 @@ Aplicación web interactiva, pedagógica y lúdica diseñada especialmente para 
    - Retroalimentación formativa inmediata con explicaciones claras adaptadas a 9-10 años.
 
 2. **🚴‍♀️ Parte 2: Misión en la Naturaleza (Inspirada en la Prueba A Oficial - Caso Práctico)**
-   - 10 ejercicios aplicados a una historia contextual: la excursión cicloturista de Ana y sus amigos.
+   - 10 ejercicios aplicados a una historia contextual: la excursión cicloturista de Lucía y sus amigos.
    - Análisis del menú del pícnic (salmón ahumado, pan de cereales, fruta, agua).
    - Consejos sobre bebidas (agua vs. refrescos azucarados).
    - Higiene postural: elección de la mochila ergonómica de dos tirantes vs. bolsa de un solo asa.

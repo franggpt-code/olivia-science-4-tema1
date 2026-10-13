@@ -164,18 +164,18 @@ const EXAM_DATA = {
     id: "part2",
     title: "Parte 2: Misión en la Naturaleza",
     subtitle: "Caso práctico aplicado (Basado en la Prueba A)",
-    description: "Acompaña a Olivia, Ana y sus amigos en su jornada ciclista y pícnic en el campo resolviendo 10 casos reales de salud, postura y nutrición.",
+    description: "Acompaña a Olivia, Lucía y sus amigos en su jornada ciclista y pícnic en el campo resolviendo 10 casos reales de salud, postura y nutrición.",
     badge: "Prueba A",
     story: {
       headline: "📖 Caso Práctico: «La Gran Ruta en Bici y el Pícnic Saludable»",
-      text: "En el colegio de Olivia y Ana se ha organizado una divertida ruta en bicicleta de montaña para el próximo sábado con sus compañeros de clase. Ana hace tiempo que no practica con la bici, pero tiene muchísima ilusión por pasar el día conviviendo y pedaleando con sus amigas.\n\nPara reponer fuerzas a mitad de camino en una pradera junto al río, Ana ha preparado su fiambrera con:\n• Sándwiches de pan de cereales con salmón ahumado.\n• Manzanas frescas crujientes.\n• Cantimploras con abundante agua fresca.\n\nDurante los preparativos surgen varias dudas sobre cómo equiparse, qué llevar en la mochila y cómo cuidar la postura."
+      text: "En el colegio de Olivia y Lucía se ha organizado una divertida ruta en bicicleta de montaña para el próximo sábado con sus compañeros de clase. Lucía hace tiempo que no practica con la bici, pero tiene muchísima ilusión por pasar el día conviviendo y pedaleando con sus amigas.\n\nPara reponer fuerzas a mitad de camino en una pradera junto al río, Lucía ha preparado su fiambrera con:\n• Sándwiches de pan de cereales con salmón ahumado.\n• Manzanas frescas crujientes.\n• Cantimploras con abundante agua fresca.\n\nDurante los preparativos surgen varias dudas sobre cómo equiparse, qué llevar en la mochila y cómo cuidar la postura."
     },
     questions: [
       {
         id: "p2_q1",
         number: 1,
-        title: "Salud social y hábitos de Ana",
-        instruction: "Teniendo en cuenta el texto de la historia, ¿podrías decir que Ana demuestra tener buena salud social?",
+        title: "Salud social y hábitos de Lucía",
+        instruction: "Teniendo en cuenta el texto de la historia, ¿podrías decir que Lucía demuestra tener buena salud social?",
         type: "single_choice",
         options: [
           { id: "a", text: "Sí, porque muestra interés y alegría por quedar, colaborar y compartir actividades positivas con sus amigas.", correct: true },
@@ -189,7 +189,7 @@ const EXAM_DATA = {
         id: "p2_q2",
         number: 2,
         title: "Origen de los alimentos del pícnic",
-        instruction: "Clasifica los alimentos que ha preparado Ana en su fiambrera según su ORIGEN:",
+        instruction: "Clasifica los alimentos que ha preparado Lucía en su fiambrera según su ORIGEN:",
         type: "matching",
         pairs: [
           { left: "Salmón ahumado", right: "Origen animal (pescado de río/mar)." },
@@ -202,14 +202,14 @@ const EXAM_DATA = {
         id: "p2_q3",
         number: 3,
         title: "Función de los alimentos del pícnic",
-        instruction: "¿Qué función principal cumple cada uno de los alimentos que Ana eligió para su comida campestre?",
+        instruction: "¿Qué función principal cumple cada uno de los alimentos que Lucía eligió para su comida campestre?",
         type: "matching",
         pairs: [
           { left: "El pan del sándwich", right: "Alimento energético (hidratos de carbono para dar fuerza a los pedales)." },
           { left: "El salmón ahumado", right: "Alimento constructor (proteínas para reparar y fortalecer los músculos)." },
           { left: "Las manzanas frescas", right: "Alimento regulador (vitaminas y fibra para el buen funcionamiento)." }
         ],
-        explanation: "¡Magnífico! Ana ha preparado un almuerzo completísimo que reúne las tres funciones: energía (pan), construcción (salmón) y regulación (manzanas)."
+        explanation: "¡Magnífico! Lucía ha preparado un almuerzo completísimo que reúne las tres funciones: energía (pan), construcción (salmón) y regulación (manzanas)."
       },
       {
         id: "p2_q4",
@@ -228,12 +228,12 @@ const EXAM_DATA = {
       {
         id: "p2_q5",
         number: 5,
-        title: "¿Por qué la comida de Ana es saludable?",
-        instruction: "Según lo que has estudiado sobre la dieta saludable, ¿por qué la comida de Ana puede considerarse un excelente ejemplo de alimentación sana?",
+        title: "¿Por qué la comida de Lucía es saludable?",
+        instruction: "Según lo que has estudiado sobre la dieta saludable, ¿por qué la comida de Lucía puede considerarse un excelente ejemplo de alimentación sana?",
         type: "single_choice",
         options: [
           { id: "a", text: "Porque combina alimentos de los tres grupos (energéticos, constructores y reguladores), prioriza ingredientes frescos y agua, y prescinde de ultraprocesados.", correct: true },
-          { id: "b", text: "Porque Ana no va a comer nada en todo el día para adelgazar.", correct: false },
+          { id: "b", text: "Porque Lucía no va a comer nada en todo el día para adelgazar.", correct: false },
           { id: "c", text: "Porque solo lleva dulces de repostería que dan mucha azúcar.", correct: false },
           { id: "d", text: "Porque las manzanas son rojas y es el color de la salud.", correct: false }
         ],
@@ -243,7 +243,7 @@ const EXAM_DATA = {
         id: "p2_q6",
         number: 6,
         title: "El consejo para la amiga de los refrescos",
-        instruction: "Una de las amigas de Ana va a llevar dos latas de refrescos con gas y azúcar para beber durante la ruta en bicicleta. ¿Qué consejo saludable le darías según tu libro?",
+        instruction: "Una de las amigas de Lucía va a llevar dos latas de refrescos con gas y azúcar para beber durante la ruta en bicicleta. ¿Qué consejo saludable le darías según tu libro?",
         type: "single_choice",
         options: [
           { id: "a", text: "Aconsejarle que beba agua mineral (entre 1,5 y 2 litros) como bebida principal, y que no sustituya el agua por refrescos azucarados ultraprocesados.", correct: true },
@@ -273,7 +273,7 @@ const EXAM_DATA = {
         id: "p2_q8",
         number: 8,
         title: "Consejos para la bicicleta: Antes, Durante y Después",
-        instruction: "Ana dice que hace mucho que no monta en bicicleta. Para evitar riesgos y accidentes, relaciona el consejo con el momento correspondiente:",
+        instruction: "Lucía dice que hace mucho que no monta en bicicleta. Para evitar riesgos y accidentes, relaciona el consejo con el momento correspondiente:",
         type: "matching",
         pairs: [
           { left: "Antes de empezar la ruta", right: "Revisar frenos y ruedas, ponerse el casco ajustado y hacer ejercicios de calentamiento." },

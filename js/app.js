@@ -199,7 +199,7 @@ class ScienceApp {
                   Parte 2: Misión y Caso Práctico
                 </h3>
                 <p class="text-sm text-slate-600 leading-relaxed font-medium">
-                  10 preguntas aplicadas sobre la excursión en bici de Ana: el pícnic de salmón, refrescos, mochila adecuada y posturas.
+                  10 preguntas aplicadas sobre la excursión en bici de Lucía: el pícnic de salmón, refrescos, mochila adecuada y posturas.
                 </p>
                 <div class="flex items-center gap-2 text-xs font-bold text-emerald-600">
                   <span>📖 Caso contextual</span>
