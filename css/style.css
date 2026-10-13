@@ -1,0 +1,213 @@
+/* =============================================================================
+   ESTILOS PERSONALIZADOS · SCIENCE 4º PRIMARIA · LA SALUD
+   Diseño amigable, lúdico, accesible y 100% responsivo para 4º de Primaria
+   ============================================================================= */
+
+:root {
+  --primary: #3b82f6;
+  --primary-dark: #1d4ed8;
+  --secondary: #10b981;
+  --accent: #f59e0b;
+  --coral: #f43f5e;
+  --purple: #8b5cf6;
+  --bg-soft: #f8fafc;
+  --text-main: #1e293b;
+}
+
+body {
+  font-family: 'Outfit', 'Nunito', system-ui, -apple-system, sans-serif;
+  color: var(--text-main);
+  background: linear-gradient(135deg, #f0fdf4 0%, #eff6ff 50%, #fdf4ff 100%);
+  min-height: 100vh;
+}
+
+/* Tipografía amigable */
+.font-display {
+  font-family: 'Outfit', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+/* Efectos de tarjeta suave con sombra lúdica */
+.card-playful {
+  background: white;
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
+  border: 2px solid #f1f5f9;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-playful:hover {
+  border-color: #e2e8f0;
+}
+
+/* Botones interactivos con relieve táctil (estilo Duolingo) */
+.btn-bouncy {
+  position: relative;
+  transition: all 0.15s ease;
+  user-select: none;
+  font-weight: 700;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.12);
+}
+
+.btn-bouncy:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.12);
+}
+
+.btn-bouncy:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Opciones de pregunta interactiva */
+.option-card {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 2px solid #e2e8f0;
+  cursor: pointer;
+  background-color: #ffffff;
+  user-select: none;
+}
+
+.option-card:hover:not(.disabled) {
+  border-color: #3b82f6;
+  background-color: #f8faff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px -2px rgba(59, 130, 246, 0.15);
+}
+
+.option-card.selected {
+  border-color: #2563eb;
+  background-color: #eff6ff;
+  box-shadow: 0 0 0 2px #bfdbfe;
+}
+
+.option-card.correct-reveal {
+  border-color: #10b981 !important;
+  background-color: #ecfdf5 !important;
+  box-shadow: 0 0 0 2px #a7f3d0 !important;
+}
+
+.option-card.incorrect-reveal {
+  border-color: #ef4444 !important;
+  background-color: #fef2f2 !important;
+  box-shadow: 0 0 0 2px #fecaca !important;
+}
+
+/* Fichas de rellenar huecos */
+.word-token {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 0.9rem;
+  background: white;
+  border: 2px solid #cbd5e1;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  color: #334155;
+  cursor: pointer;
+  box-shadow: 0 2px 0 #94a3b8;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.word-token:hover {
+  border-color: #3b82f6;
+  color: #2563eb;
+  transform: translateY(-2px);
+}
+
+.word-token:active {
+  transform: translateY(2px);
+  box-shadow: none;
+}
+
+.word-token.used {
+  opacity: 0.3;
+  pointer-events: none;
+  border-style: dashed;
+}
+
+.blank-slot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 130px;
+  min-height: 42px;
+  padding: 0.3rem 0.8rem;
+  margin: 0 0.3rem;
+  background: #f1f5f9;
+  border: 2px dashed #94a3b8;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  color: #1e293b;
+  vertical-align: middle;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.blank-slot.filled {
+  background: #eff6ff;
+  border: 2px solid #3b82f6;
+  color: #1d4ed8;
+  border-style: solid;
+}
+
+/* Animaciones suaves */
+@keyframes popIn {
+  0% { transform: scale(0.9); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-pop-in {
+  animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+  50% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+}
+
+.pulse-glow {
+  animation: pulseGlow 2s infinite;
+}
+
+/* Diploma oficial imprimible */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #diploma-printable, #diploma-printable * {
+    visibility: visible;
+  }
+  #diploma-printable {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 2cm;
+    background: white !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* Scrollbar estilizada */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}

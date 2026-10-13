@@ -1,0 +1,20 @@
+{
+  "name": "olivia-science-4-tema1",
+  "version": "1.0.0",
+  "description": "Aplicación interactiva de práctica para el examen de Ciencias de la Naturaleza (Science) de 4º de primaria · Tema 1: La Salud",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 3000"
+  },
+  "keywords": [
+    "science",
+    "conocimiento-del-medio",
+    "primaria",
+    "4-primaria",
+    "la-salud",
+    "santillana",
+    "claves"
+  ],
+  "author": "Fran Guerrero",
+  "license": "MIT"
+}

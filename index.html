@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Science 4º Primaria · Tema 1: La Salud | Entrenador de Exámenes</title>
+  <meta name="description" content="Aplicación interactiva de preparación para el examen de Conocimiento del Medio / Science de 4º de primaria (Tema 1: La Salud). Basada en el proyecto CLAVES Santillana.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
+
+  <!-- Tipografías Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Nunito', 'sans-serif'],
+            display: ['Outfit', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <!-- Estilos propios -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="flex flex-col min-h-screen text-slate-800 antialiased selection:bg-blue-200">
+
+  <!-- =========================================================================
+       CABECERA PRINCIPAL (NAVBAR)
+       ========================================================================= -->
+  <header class="no-print sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200/80 shadow-xs">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+      
+      <!-- Marca / Logo -->
+      <div class="flex items-center gap-3 cursor-pointer" onclick="app.navigate('home')">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-2xl shadow-md text-white">
+          🔬
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-black text-lg md:text-xl font-display text-slate-900 tracking-tight leading-none">
+              Science 4.º
+            </span>
+            <span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded-md text-[10px] font-black uppercase tracking-wider">
+              Tema 1
+            </span>
+          </div>
+          <span class="text-xs text-slate-500 font-bold block mt-0.5">
+            La Salud · Proyecto CLAVES
+          </span>
+        </div>
+      </div>
+
+      <!-- Pestañas centrales de acceso rápido (Desktop) -->
+      <nav class="hidden lg:flex items-center gap-1 bg-slate-100/80 p-1 rounded-2xl border border-slate-200/60">
+        <button class="nav-tab-btn px-3 py-1.5 rounded-xl text-xs font-black transition" data-target="home">
+          🏠 Inicio
+        </button>
+        <button class="nav-tab-btn px-3 py-1.5 rounded-xl text-xs font-black transition" data-target="part1">
+          📝 Parte 1 (Conceptos)
+        </button>
+        <button class="nav-tab-btn px-3 py-1.5 rounded-xl text-xs font-black transition" data-target="part2">
+          🚴‍♀️ Parte 2 (Caso Práctico)
+        </button>
+        <button class="nav-tab-btn px-3 py-1.5 rounded-xl text-xs font-black transition" data-target="express">
+          ⚡ Desafío Express
+        </button>
+        <button class="nav-tab-btn px-3 py-1.5 rounded-xl text-xs font-black transition" data-target="sorter">
+          🍎 Clasificador
+        </button>
+        <button class="nav-tab-btn px-3 py-1.5 rounded-xl text-xs font-black transition" data-target="study">
+          📚 Guía Resumen
+        </button>
+      </nav>
+
+      <!-- Panel de Usuario y Sonido -->
+      <div class="flex items-center gap-3">
+        <!-- Contador de Estrellas -->
+        <div class="flex items-center gap-1.5 px-3 py-1.5 bg-amber-50 border border-amber-200 rounded-2xl text-amber-900 font-black text-xs md:text-sm shadow-xs" title="Estrellas conseguidas">
+          <span class="text-base">⭐</span>
+          <span id="header-stars">0</span>
+        </div>
+
+        <!-- Nombre del Alumno -->
+        <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-slate-100 rounded-2xl text-slate-700 text-xs font-bold">
+          <span>👋</span>
+          <span id="header-student-name">Olivia</span>
+        </div>
+
+        <!-- Botón de Sonido -->
+        <button id="toggle-sound-btn" class="w-10 h-10 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center text-lg transition shadow-xs" title="Activar/desactivar efectos de sonido">
+          🔊
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Pestañas móvil (Sub-barra horizontal con scroll) -->
+    <div class="lg:hidden flex items-center gap-1 px-4 py-2 border-t border-slate-100 overflow-x-auto no-scrollbar bg-slate-50/70 text-xs font-bold">
+      <button class="nav-tab-btn px-3 py-1.5 rounded-xl shrink-0 transition" data-target="home">🏠 Inicio</button>
+      <button class="nav-tab-btn px-3 py-1.5 rounded-xl shrink-0 transition" data-target="part1">📝 Parte 1</button>
+      <button class="nav-tab-btn px-3 py-1.5 rounded-xl shrink-0 transition" data-target="part2">🚴‍♀️ Parte 2</button>
+      <button class="nav-tab-btn px-3 py-1.5 rounded-xl shrink-0 transition" data-target="express">⚡ Desafío</button>
+      <button class="nav-tab-btn px-3 py-1.5 rounded-xl shrink-0 transition" data-target="sorter">🍎 Alimentos</button>
+      <button class="nav-tab-btn px-3 py-1.5 rounded-xl shrink-0 transition" data-target="study">📚 Resumen</button>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       CONTENIDO PRINCIPAL DINÁMICO
+       ========================================================================= -->
+  <main class="flex-1 max-w-6xl w-full mx-auto px-4 py-6 md:py-8" id="app-main-content">
+    <!-- El contenido se inyecta desde js/app.js -->
+  </main>
+
+  <!-- =========================================================================
+       PIE DE PÁGINA
+       ========================================================================= -->
+  <footer class="no-print bg-white border-t border-slate-200 mt-auto py-6">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-semibold text-slate-500">
+      <div class="flex items-center gap-2">
+        <span class="text-base">🎓</span>
+        <span>Entrenador de Ciencias de la Naturaleza · 4.º Primaria</span>
+        <span>•</span>
+        <span>Tema 1: La Salud (Grazalema–Santillana)</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <span>Hecho para Olivia con ❤️</span>
+        <button class="text-blue-600 hover:underline" onclick="app.navigate('diploma')">Ver Diploma Oficial</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts de la Aplicación -->
+  <script src="js/data.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
