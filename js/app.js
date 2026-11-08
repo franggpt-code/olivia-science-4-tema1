@@ -125,25 +125,24 @@ class ScienceApp {
     container.innerHTML = `
       <div class="max-w-5xl mx-auto space-y-8 animate-pop-in">
         <!-- Hero Banner Infantil -->
-        <div class="relative overflow-hidden bg-gradient-to-r from-blue-600 via-indigo-600 to-emerald-500 rounded-3xl p-8 md:p-10 text-white shadow-xl">
+        <div class="hero-banner p-6 sm:p-10 relative overflow-hidden">
           <div class="relative z-10 max-w-2xl space-y-4">
-            <div class="inline-flex items-center gap-2 px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs md:text-sm font-semibold tracking-wide">
-              <span>🎒 4.º de Primaria</span>
-              <span>•</span>
-              <span>Editorial Santillana · CLAVES</span>
+            <div class="hero-badge mb-3">
+              <span>🍎</span>
+              <span>Ciencias de la Naturaleza 4.º Primaria · Tema 1</span>
             </div>
-            <h1 class="text-3xl md:text-5xl font-black font-display leading-tight">
+            <h1 class="text-3xl md:text-5xl font-black font-display leading-tight text-white">
               ¡Hola, <span class="text-amber-300 underline decoration-wavy decoration-amber-400 cursor-pointer" id="edit-name-btn" title="Haz clic para cambiar nombre">${this.studentName}</span>! 🌟
             </h1>
-            <p class="text-blue-100 text-base md:text-lg leading-relaxed font-medium">
+            <p class="hero-p">
               Prepárate para sacar un <span class="text-yellow-300 font-bold">10 en el examen de Ciencias</span> del <strong>Tema 1: La Salud</strong>.
               Practica con preguntas como las del cole, resuelve la gran misión de la bicicleta y diviértete clasificando alimentos.
             </p>
             <div class="flex flex-wrap gap-3 pt-2">
-              <button id="btn-start-p1" class="btn-bouncy px-6 py-3.5 bg-amber-400 hover:bg-amber-300 text-slate-900 rounded-2xl font-black text-base shadow-lg flex items-center gap-2">
+              <button id="btn-start-p1" class="btn-bounce hero-btn-primary px-6 py-3.5 rounded-2xl text-base shadow-lg">
                 <span>🚀 Empezar Parte 1 (Conceptos)</span>
               </button>
-              <button id="btn-start-p2" class="btn-bouncy px-6 py-3.5 bg-emerald-400 hover:bg-emerald-300 text-slate-900 rounded-2xl font-black text-base shadow-lg flex items-center gap-2">
+              <button id="btn-start-p2" class="btn-bounce hero-btn-secondary px-6 py-3.5 rounded-2xl text-base shadow-lg">
                 <span>🚴‍♀️ Misión Caso Práctico (Parte 2)</span>
               </button>
             </div>
